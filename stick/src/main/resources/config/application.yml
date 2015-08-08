@@ -6,7 +6,7 @@ security.basic.enabled: false
 endpoints.jolokia.enabled: false
 
 # security configuration (this key should be unique for your application, and kept secret)
-jhipster.security.rememberme.key: 3720dbdc45ea50156552317a188128328d437aa4
+jhipster.security.rememberme.key: d68931a59e1ef2719c3066a24a26c227a7d5c217
 
 async:
     corePoolSize: 2
@@ -23,6 +23,12 @@ mail:
     auth: false
     from: stick@localhost
 
+authentication:
+    oauth:
+        clientid: stickapp
+        secret: mySecretOAuthSecret
+        # Token is valid 30 minutes
+        tokenValidityInSeconds: 1800
 
 swagger:
     title: stick API

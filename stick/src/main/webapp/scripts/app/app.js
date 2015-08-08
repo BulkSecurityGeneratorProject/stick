@@ -51,10 +51,6 @@ angular.module('stickApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pascalpr
     })
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, $translateProvider, tmhDynamicLocaleProvider, httpRequestInterceptorCacheBusterProvider) {
 
-        //enable CSRF
-        $httpProvider.defaults.xsrfCookieName = 'CSRF-TOKEN';
-        $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
-
         //Cache everything except rest api requests
         httpRequestInterceptorCacheBusterProvider.setMatchlist([/.*api.*/, /.*protected.*/], true);
 
@@ -81,6 +77,7 @@ angular.module('stickApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pascalpr
 
         $httpProvider.interceptors.push('errorHandlerInterceptor');
         $httpProvider.interceptors.push('authExpiredInterceptor');
+        $httpProvider.interceptors.push('authInterceptor');
         $httpProvider.interceptors.push('notificationInterceptor');
         
         // Initialize angular-translate

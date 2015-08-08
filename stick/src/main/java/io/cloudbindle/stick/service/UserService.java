@@ -1,10 +1,8 @@
 package io.cloudbindle.stick.service;
 
 import io.cloudbindle.stick.domain.Authority;
-import io.cloudbindle.stick.domain.PersistentToken;
 import io.cloudbindle.stick.domain.User;
 import io.cloudbindle.stick.repository.AuthorityRepository;
-import io.cloudbindle.stick.repository.PersistentTokenRepository;
 import io.cloudbindle.stick.repository.UserRepository;
 import io.cloudbindle.stick.security.SecurityUtils;
 import io.cloudbindle.stick.service.util.RandomUtil;
@@ -15,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.HashSet;
@@ -26,6 +25,7 @@ import java.util.Set;
  * Service class for managing users.
  */
 @Service
+@Transactional
 public class UserService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
@@ -35,9 +35,6 @@ public class UserService {
 
     @Inject
     private UserRepository userRepository;
-
-    @Inject
-    private PersistentTokenRepository persistentTokenRepository;
 
     @Inject
     private AuthorityRepository authorityRepository;
@@ -129,27 +126,11 @@ public class UserService {
         });
     }
 
+    @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
         User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).get();
         currentUser.getAuthorities().size(); // eagerly load the association
         return currentUser;
-    }
-
-    /**
-     * Persistent Token are used for providing automatic authentication, they should be automatically deleted after
-     * 30 days.
-     * <p/>
-     * <p>
-     * This is scheduled to get fired everyday, at midnight.
-     * </p>
-     */
-    @Scheduled(cron = "0 0 0 * * ?")
-    public void removeOldPersistentTokens() {
-        LocalDate now = new LocalDate();
-        persistentTokenRepository.findByTokenDateBefore(now.minusMonths(1)).stream().forEach(token ->{
-            log.debug("Deleting token {}", token.getSeries());
-            persistentTokenRepository.delete(token);
-        });
     }
 
     /**

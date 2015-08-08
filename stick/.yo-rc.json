@@ -3,19 +3,19 @@
     "baseName": "stick",
     "packageName": "io.cloudbindle.stick",
     "packageFolder": "io/cloudbindle/stick",
-    "authenticationType": "session",
+    "authenticationType": "oauth2",
     "hibernateCache": "no",
     "clusteredHttpSession": "no",
     "websocket": "no",
-    "databaseType": "mongodb",
-    "devDatabaseType": "mongodb",
-    "prodDatabaseType": "mongodb",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "postgresql",
     "searchEngine": "no",
     "useCompass": false,
     "buildTool": "maven",
     "frontendBuilder": "grunt",
     "javaVersion": "8",
     "enableTranslation": true,
-    "rememberMeKey": "3720dbdc45ea50156552317a188128328d437aa4"
+    "rememberMeKey": "d68931a59e1ef2719c3066a24a26c227a7d5c217"
   }
 }

@@ -4,7 +4,7 @@ server:
 
 
 # security configuration (this key should be unique for your application, and kept secret)
-jhipster.security.rememberme.key: 3720dbdc45ea50156552317a188128328d437aa4
+jhipster.security.rememberme.key: d68931a59e1ef2719c3066a24a26c227a7d5c217
 
 async:
     corePoolSize: 2
@@ -15,11 +15,28 @@ liquibase:
     context: test
 
 spring:
-    data:
-        mongodb:
-            host: localhost
-            port: 27017
-            database: stick
+    datasource:
+        dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+        url: jdbc:h2:mem:stick;DB_CLOSE_DELAY=-1
+        databaseName:
+        serverName:
+        username:
+        password:
+
+    jpa:
+        database-platform: io.cloudbindle.stick.domain.util.FixedH2Dialect
+        database: H2
+        openInView: false
+        show_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+        properties:
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.hbm2ddl.auto: validate
 
 mail:
     host: localhost
