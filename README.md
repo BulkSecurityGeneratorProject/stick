@@ -2,7 +2,7 @@
 
 A prototype tool for sharing provisioning recipes.
 
-This uses (JHipster)[https://jhipster.github.io/].
+This uses [JHipster](https://jhipster.github.io/).
 
 ## Compiling
 
