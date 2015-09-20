@@ -24,8 +24,10 @@ You can just run this via Maven:
 Here's the data model.  Notice, it's really similar to DockerHub since Stick's website will operate similarly (but maintain no source/repositories ourselves, just metadata).
 
 * user (already part of JHipster)
+    * external_accounts (1..many)
+    * repositories (1..many)
 * external_account
-    * provider [github]
+    * provider [dockerhub,quay.io]
     * username
     * token
 * repository
@@ -34,7 +36,10 @@ Here's the data model.  Notice, it's really similar to DockerHub since Stick's w
     * short_description
     * visibility
     * repo_url
-    * provider [github]
+    * provider [dockerhub,quay.io]
+    * tags (many...many)
+    * collaborators (1...many)
+    * repository_settings (1...many)
 
 A repository can have 0_n of the following associated with it:
 
@@ -42,7 +47,7 @@ A repository can have 0_n of the following associated with it:
     * key
     * value
 * collaborators
-    * team
+    * user
     * permissions
 
 A repository must have 1 or more of these associated with it:
@@ -51,5 +56,6 @@ A repository must have 1 or more of these associated with it:
     * push_type [branch|tag]
     * name
     * dockerfile_path
+    * param_descriptor_json (this is a JSON that describes how to run the provisioning tool, might need to be )
     * stick_path
     * stick_tag_name
