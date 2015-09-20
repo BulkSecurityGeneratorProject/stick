@@ -1,10 +1,10 @@
 # Stick - A Web Repository for CloudBindle Recipies
 
-A prototype tool for sharing provisioning recipes.  Stick lets a user connect to their Github account and link one or more "can" repos to their profile.  A can is a container-based recipe for building resources in a cloud.  It has a JSON file that defines certain needed pieces of information to be listed in Stick, it has a Dockerfile that defines the environment used to provision (e.g. has an install of Terraform), and any other resources needed to setup what is provisioned (e.g. )
+This application, Stick, allows people to publish their provisioning receipes (provisioning JSON descriptor + Docker container to actually do the provisioning) and use them with CloudBindle.
 
-This application, Stick, allows people to publish their Cans and use them with Bindle.
+Stick lets a user connect to their Github account and link one or more provisioning receipies repos (called "cans" tentatively) to their profile.  A can is a container-based recipe for building resources in a cloud.  It has a JSON file that defines certain needed pieces of information to be listed in Stick, it has a Dockerfile that defines the environment used to provision (e.g. has an install of Terraform), and any other resources needed to setup what is provisioned (e.g. APIs, config files, etc).  Notice this is really, really similar to the "DockStore" in [Collaboratory](https://github.com/CancerCollaboratory/dockstore) which is used for analytical workflows in Docker rather than provisioning receipies.  We will probably converge the two codebases in the near future but this repo exits for the time being so I can explore [JHipster](https://jhipster.github.io/) without interrupting development on the DockStore.
 
-This uses [JHipster](https://jhipster.github.io/).
+This project uses [JHipster](https://jhipster.github.io/).
 
 ## Compiling
 
